@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11D50d" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Favorite" representedClassName="Favorite" syncable="YES">
+        <attribute name="creationDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="videoInfo" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="VideoInfo" inverseName="favoriteVideo" inverseEntity="VideoInfo" syncable="YES"/>
+    </entity>
+    <entity name="Playlist" representedClassName="Playlist" syncable="YES">
+        <attribute name="creationDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="detailDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <relationship name="videos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="VideoInfo" inverseName="playLists" inverseEntity="VideoInfo" syncable="YES"/>
+    </entity>
+    <entity name="VideoInfo" representedClassName="VideoInfo" syncable="YES">
+        <attribute name="creationDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="duration" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="thumbnailImage" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="thumbnailURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uploaderName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="videoDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="videoID" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="videoTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="favoriteVideo" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Favorite" inverseName="videoInfo" inverseEntity="Favorite" syncable="YES"/>
+        <relationship name="playLists" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Playlist" inverseName="videos" inverseEntity="Playlist" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Favorite" positionX="169" positionY="-132" width="128" height="75"/>
+        <element name="Playlist" positionX="169" positionY="9" width="128" height="105"/>
+        <element name="VideoInfo" positionX="-54" positionY="-9" width="128" height="195"/>
+    </elements>
+</model>

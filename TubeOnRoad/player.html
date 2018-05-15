@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+   <html>
+       <body>
+             <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+             <div id='player'></div>
+             <script>
+             var tag = document.createElement('script');
+             tag.src = '//www.youtube.com/iframe_api';
+             var firstScriptTag = document.getElementsByTagName('script')[0];
+             firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+             var player;
+             function onYouTubeIframeAPIReady() {
+                 player = new YT.Player('player', {
+                    height: '200',
+                    width: '200',
+                    videoId: '%@',
+                    events: {
+                        'onReady': onPlayerReady,
+                        'onStateChange': onPlayerStateChange,
+                        'onytplayerStateChange': onytplayerStateChange                
+                    }
+                    });
+                }
+             function onPlayerReady(event) {
+                    event.target.playVideo();
+                }
+             function onytplayerStateChange(newState) {
+                     location.href='callback://newstate';
+                }             
+             var done = false;
+             function onPlayerStateChange(event) {
+                 //location.href='callback://stopVideo';
+                 if (event.data == YT.PlayerState.PLAYING && !done) {
+                        done = true;
+                    }
+                    if (event.data == YT.PlayerState.ENDED) {
+                     location.href='callback://stopVideo';
+                     
+                    }
+                }
+             
+             function stopVideo() {
+                    player.stopVideo();
+                   // location.href='callback://stopVideo';
+                }
+                 function loadVideoById(videoId) {
+                     player.loadVideoById(videoId);
+                     player.playVideo();
+                 }
+             function playVideo() {
+                    if (player.data != YT.PlayerState.PLAYING)
+                        player.playVideo();
+                }                 
+             function pauseVideo() {
+                 //if (player.data == YT.PlayerState.PLAYING) 
+                    player.pauseVideo();
+                // location.href='callback://pauseVideo';                 
+                }
+             </script>
+        </body>
+    </html>
